@@ -1,5 +1,5 @@
 import React, { useEffect, useContext, useReducer, useState } from "react";
-import Header from "../Header/Header";
+// import Header from "../Header/Header";
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
 import "./GK.css";
@@ -96,7 +96,7 @@ const Gk = () => {
         // update previous value in db-------------------
         axios
           .put(
-            `https://unusual-dirndl-slug.cyclic.cloud/api/v1/users/updateGkQuestions/previousPoints/${userId}`,
+            `https://muddy-bat-moccasins.cyclic.cloud/api/v1/users/updateGkQuestions/previousPoints/${userId}`,
             {
               prevPoint: preValues,
             }
@@ -115,7 +115,7 @@ const Gk = () => {
 
         axios
           .put(
-            `https://unusual-dirndl-slug.cyclic.cloud/api/v1/users/updateGKQuestions/totalPoints/${userId}`,
+            `https://muddy-bat-moccasins.cyclic.cloud/api/v1/users/updateGKQuestions/totalPoints/${userId}`,
             {
               gkTotalPoints: totalValue,
             }
@@ -172,7 +172,7 @@ const Gk = () => {
           setUserId(userId);
           axios
             .put(
-              `https://unusual-dirndl-slug.cyclic.cloud/api/v1/users/updateCurrentPoints/${userId}`,
+              `https://muddy-bat-moccasins.cyclic.cloud/api/v1/users/updateCurrentPoints/${userId}`,
               {
                 currentPoints: updatedPoints,
               }
@@ -229,7 +229,7 @@ const Gk = () => {
         justifyContent: "center",
       }}
     >
-      <Header />
+      {/* <Header /> */}
       <section style={{ marginTop: "6em" ,}}>
         <h5 style={{ textAlign: "end", margin: "0", marginRight: "52px" , color :"red"}}>
           Timer: {formatTime(state.timeRemaining)}

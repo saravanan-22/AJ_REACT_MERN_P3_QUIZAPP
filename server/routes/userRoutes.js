@@ -11,6 +11,7 @@ import {
   getTotalPoints,
   updateUserData,
   updatePassword,
+  deleteAccount
 } from "../controllers/userControllers.js";
 
 // CreateUser -POST http://localhost:5000/api/v1/user/create
@@ -43,4 +44,7 @@ router.put("/editedUserData/singleUser/:id", updateUserData);
 //PATCH -http://localhost:5000/api/v1/users/forgotPassword/:id
 router.patch("/forgotPassword/:id", updatePassword);
 
+
+//Delete -http://locahost:5000/api/v1/users/deleteAccont/:id
+router.delete("/deleteAccount/:id", deleteAccount)
 export default router;

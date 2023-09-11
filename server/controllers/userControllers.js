@@ -119,6 +119,7 @@ export const updateUserData = (req, res) => {
   const { id } = req.params;
   const newData = req.body;
   User.findByIdAndUpdate(id, {
+    profileImage : newData.userImage,
     username: newData.username,
     email: newData.email,
     password: newData.password,
@@ -141,13 +142,29 @@ export const updatePassword = (req, res) => {
   const { id } = req.params;
   const newPassword = req.body;
   User.findByIdAndUpdate(id, { password: newPassword.password })
-    .then((updatedPassword) => res.status(200).json({success : true , data : updatedPassword}))
+    .then((updatedPassword) =>
+      res.status(200).json({ success: true, data: updatedPassword })
+    )
     .catch((err) =>
-    res.status(400).json({
-      success: false,
-      message: `Failed to create user: ${err.message}`,
-      error: err, // Optionally include the full error object for debugging
-    })
-  );
+      res.status(400).json({
+        success: false,
+        message: `Failed to create user: ${err.message}`,
+        error: err, // Optionally include the full error object for debugging
+      })
+    );
 };
-  
+
+// delete deleteUserAccount permanently-------------------------
+
+export const deleteAccount = (req, res) => {
+  const { id } = req.params;
+  User.findByIdAndRemove(id)
+    .then((accountDeleted) =>
+      res.status(200).json({
+        success: "true",
+        message: `account with the id ${id} deleted successfully`,
+        data: accountDeleted,
+      })
+    )
+    .catch((err) => console.log(err));
+};

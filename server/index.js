@@ -12,7 +12,7 @@ const CONNECTION_URL = process.env.CONNECTION_URL;
 const GK_URL = process.env.GK_URL
 
 //middleWares------------------------------------------------------------------------------------------------
-
+app.use(express.json({ limit: '10mb' }))
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cors());

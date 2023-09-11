@@ -10,6 +10,7 @@ import { useState } from "react";
 import axios from "axios";
 import background from "../../images/login_background.jpg";
 
+
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -21,7 +22,7 @@ const Login = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     axios
-      .get("https://unusual-dirndl-slug.cyclic.cloud/api/v1/users")
+      .get("https://muddy-bat-moccasins.cyclic.cloud/api/v1/users")
       .then((res) => {
         const fetchedUsers = res.data;
         const { data } = fetchedUsers;
@@ -31,7 +32,7 @@ const Login = () => {
 
         if (user) {
           localStorage.setItem("uid", user._id);
-          alert("Login successful");
+          alert("Login completed successfully. Welcome!");
           navigate("/Home");
           setTimeout(() => {
             window.location.reload();

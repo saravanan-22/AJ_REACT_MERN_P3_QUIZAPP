@@ -19,7 +19,7 @@ const ResetPassword = () => {
 
     // Get all user details from the API
     axios
-      .get("https://unusual-dirndl-slug.cyclic.cloud/api/v1/users")
+      .get("https://muddy-bat-moccasins.cyclic.cloud/api/v1/users")
       .then((res) => {
         const fetchedUsers = res.data.data;
         setUsersData(fetchedUsers);
@@ -41,7 +41,7 @@ const ResetPassword = () => {
     if (userId && userPassword) {
       axios
         .patch(
-          `https://unusual-dirndl-slug.cyclic.cloud/api/v1/users/forgotPassword/${userId}`,
+          `https://muddy-bat-moccasins.cyclic.cloud/api/v1/users/forgotPassword/${userId}`,
           {
             password: userPassword,
           }

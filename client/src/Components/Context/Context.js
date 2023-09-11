@@ -18,7 +18,7 @@ export const Context = ({ children }) => {
 
   useEffect(() => {
     axios
-      .get("https://unusual-dirndl-slug.cyclic.cloud/api/v1/gkQuestions")
+      .get("https://muddy-bat-moccasins.cyclic.cloud/api/v1/gkQuestions")
       .then((res) => {
         const fetchedQuestions = res.data;
         const { data } = fetchedQuestions;
@@ -34,7 +34,7 @@ export const Context = ({ children }) => {
     const userId = localStorage.getItem("uid");
     setUserId(userId)
     axios
-      .get(`https://unusual-dirndl-slug.cyclic.cloud/api/v1/users/getCurrentPoints/${userId}`)
+      .get(`https://muddy-bat-moccasins.cyclic.cloud/api/v1/users/getCurrentPoints/${userId}`)
       .then((res) => {
         const fetchedQuestions = res.data;
         const { data } = fetchedQuestions;
@@ -48,7 +48,7 @@ export const Context = ({ children }) => {
 
     axios
       .get(
-        `https://unusual-dirndl-slug.cyclic.cloud/api/v1/users/getGkQuestions/previousPoints/${userId}`
+        `https://muddy-bat-moccasins.cyclic.cloud/api/v1/users/getGkQuestions/previousPoints/${userId}`
       )
       .then((res) => {
         const fetchedPrePoints = res.data;
@@ -61,7 +61,7 @@ export const Context = ({ children }) => {
 
     axios
       .get(
-        `https://unusual-dirndl-slug.cyclic.cloud/api/v1/users/getGkQuestions/totalPoints/${userId}`
+        `https://muddy-bat-moccasins.cyclic.cloud/api/v1/users/getGkQuestions/totalPoints/${userId}`
       )
       .then((res) => {
         const fetchedPrePoints = res.data;

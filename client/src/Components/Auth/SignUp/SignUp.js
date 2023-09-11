@@ -18,6 +18,7 @@ const SignUp = () => {
   const [phoneNumber, setPhoneNumber] = useState("");
   const [userNameError, setUserNameError] = useState("");
   const [passwordError, setPasswordError] = useState("");
+  const [imageData, setImageData] = useState("");
 
   const navigate = useNavigate();
 
@@ -42,7 +43,8 @@ const SignUp = () => {
     }
 
     axios
-      .post("https://unusual-dirndl-slug.cyclic.cloud/api/v1/users/create", {
+      .post("https://muddy-bat-moccasins.cyclic.cloud/api/v1/users/create", {
+        profileImage: imageData,
         username: userName,
         email: email,
         password: password.toString(),
@@ -57,6 +59,20 @@ const SignUp = () => {
         console.log(err);
         alert(err);
       });
+  };
+
+  const handleImageUpload = (event) => {
+    const file = event.target.files[0];
+
+    if (file) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        // Convert the image data to Base64 encoding
+        const base64String = reader.result.split(",")[1];
+        setImageData(base64String);
+      };
+      reader.readAsDataURL(file);
+    }
   };
 
   return (
@@ -74,21 +90,30 @@ const SignUp = () => {
     >
       <Card
         style={{
-          width: "22rem",
-          margin: "0 auto",
+          width: "25rem",
+          margin: "10px auto",
           padding: "0 1em",
           paddingTop: "0.5em",
-          marginTop: "1em",
           backgroundColor: "rgb(241, 241, 241)",
         }}
       >
-        <Card.Img variant="top" src={image} />
+        {/* <Card.Img variant="top" src={image} style={{width : "100px", margin : "auto"}} /> */}
 
         <Card.Body>
           <Card.Title>Register Your Account</Card.Title>
+          <hr/>
         </Card.Body>
         <>
           <Form className="d-grid" onSubmit={handleCreate}>
+            <span className="mb-2">
+              Add Profile Picture
+              <input
+                type="file"
+                accept="image/*"
+                onChange={handleImageUpload}
+              />
+            </span>
+
             <FloatingLabel label="username" className="mb-2">
               <Form.Control
                 type="text"
