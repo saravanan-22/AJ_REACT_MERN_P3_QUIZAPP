@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Header from "../Header/Header";
 import "./home.css";
 import Button from "react-bootstrap/Button";
@@ -6,8 +6,11 @@ import Container from "react-bootstrap/Container";
 import { Link } from "react-router-dom";
 import Points from "../Point/Points";
 import background from "../images/background.jpg";
+import Form from "react-bootstrap/Form";
+import axios from "axios";
 
 const Home = () => {
+  const [selectedCategory, setSelectedCategory] = useState("");
   const backgroundImageStyle = {
     backgroundImage: `url(${background})`,
     backgroundSize: "cover",
@@ -15,6 +18,11 @@ const Home = () => {
     backgroundPosition: "center",
   };
 
+  const handleStart = () => {
+    selectedCategory === "" || selectedCategory === "Select Category"
+      ? alert("select the category?")
+      : localStorage.setItem("category", selectedCategory);
+  };
   return (
     <div
       style={{
@@ -37,21 +45,46 @@ const Home = () => {
       >
         Welcome to the Quiz Game!{" "}
       </h2>
-      <p className="text-light">Test your knowledge and have fun.</p>
-      <p className="text-light">Follow these instruction:</p>
+      <p className="text-light m-0 p-0">Test your knowledge and have fun.</p>
+      <p className="text-light  m-0 p-0">Follow these instruction:</p>
       <ul style={{ listStyle: "none", color: "white", fontSize: "20px" }}>
         <li style={{ textDecoration: "underline" }}>
           Answer the questions within the time limit.
         </li>
       </ul>
-      <section
-        style={{ marginTop: "5em", marginBottom: "2em", textAlign: "center" }}
-      >
+      <div style={{ width: "20%", margin: "auto" }}>
+        <Form.Select
+          aria-label="Default select example"
+          onChange={(e) => setSelectedCategory(e.target.value)}
+          value={selectedCategory}
+        >
+          <option>Select Category</option>
+          <option value="General knowledge">General knowledge</option>
+          <option value="Computers">Computers</option>
+          <option value="sports">sports</option>
+          <option value="History">History</option>
+          <option value="Politics">Politics</option>
+          <option value="Art">Art</option>
+          <option value="Science&Nature">Science&Nature</option>
+          <option value="Animals">Animals</option>
+          <option value="Vehicles">Vehicles</option>
+          <option value="Comics">Comics</option>
+        </Form.Select>
+      </div>
+
+      <section style={{ marginBottom: "2em", textAlign: "center" }}>
         <Container>
-          <div className="text-animation mb-2">Get Ready to Play!</div>
-          <Link to="/Gk" style={{ textDecoration: "none" }}>
-            <Button variant="secondary">START</Button>
-          </Link>
+          <div className="text-animation ">Get Ready to Play!</div>
+          {/* <Link to="/Gk" style={{ textDecoration: "none" }}> */}
+          {/* <Button variant="secondary">START</Button> */}
+          <span class="animated-button1" onClick={handleStart}>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            START
+          </span>
+          {/* </Link> */}
           <Points />
         </Container>
       </section>
