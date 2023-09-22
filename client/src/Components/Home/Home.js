@@ -3,13 +3,14 @@ import Header from "../Header/Header";
 import "./home.css";
 import Button from "react-bootstrap/Button";
 import Container from "react-bootstrap/Container";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Points from "../Point/Points";
 import background from "../images/background.jpg";
 import Form from "react-bootstrap/Form";
 import axios from "axios";
 
 const Home = () => {
+  const navigate = useNavigate();
   const [selectedCategory, setSelectedCategory] = useState("");
   const backgroundImageStyle = {
     backgroundImage: `url(${background})`,
@@ -19,10 +20,18 @@ const Home = () => {
   };
 
   const handleStart = () => {
-    selectedCategory === "" || selectedCategory === "Select Category"
-      ? alert("select the category?")
-      : localStorage.setItem("category", selectedCategory);
+    if (selectedCategory === "" || selectedCategory === "Select Category") {
+      alert("Please select a category.");
+    } else {
+      // Set localStorage when a valid category is selected
+      localStorage.setItem("category", selectedCategory);
+
+      setTimeout(() => {
+        window.location.reload(navigate("/Gk"));
+      }, 2000);
+    }
   };
+
   return (
     <div
       style={{
@@ -59,7 +68,7 @@ const Home = () => {
           value={selectedCategory}
         >
           <option>Select Category</option>
-          <option value="General knowledge">General knowledge</option>
+          <option value="Gk">Gk</option>
           <option value="Computers">Computers</option>
           <option value="sports">sports</option>
           <option value="History">History</option>
@@ -77,7 +86,7 @@ const Home = () => {
           <div className="text-animation ">Get Ready to Play!</div>
           {/* <Link to="/Gk" style={{ textDecoration: "none" }}> */}
           {/* <Button variant="secondary">START</Button> */}
-          <span class="animated-button1" onClick={handleStart}>
+          <span className="animated-button1" onClick={handleStart}>
             <span></span>
             <span></span>
             <span></span>
