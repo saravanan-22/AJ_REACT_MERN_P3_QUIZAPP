@@ -22,7 +22,7 @@ export const Context = ({ children }) => {
     // Fetch GK questions
     // Construct the API URL based on selectedCategory
     axios
-      .get(`http://localhost:5000/api/v1/questions/${selectedCategory}`)
+      .get(`https://muddy-bat-moccasins.cyclic.cloud/api/v1/questions/${selectedCategory}`)
       .then((res) => {
         const fetchedQuestions = res.data.data;
         setGk(fetchedQuestions);

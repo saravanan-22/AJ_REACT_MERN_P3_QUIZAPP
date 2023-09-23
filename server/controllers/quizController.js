@@ -5,6 +5,10 @@ import HistoryQuiz from "../models/historyQ.js";
 import PoliticsQuiz from "../models/politicsQ.js";
 import ArtQuiz from "../models/artQ.js";
 import Science from "../models/scienceNatureQ.js";
+import AnimalsQuiz from "../models/animalsQ.js";
+import VehiclesQuiz from "../models/vehiclesQ.js";
+import ComicsQuiz from "../models/comicsQ.js";
+
 
 // postGKQuiz-----------------------------------------------------------------
 export const postAllGkQuestions = (req, res) => {
@@ -196,6 +200,96 @@ export const getAllScienceQuestions = (req, res) => {
         success: true,
         message: "data received successfully",
         data: scienceQuiz,
+      })
+    )
+    .catch((err) => console.log(err));
+};
+
+
+//postAllAnimalsQuestions --------------------------------------------------------
+
+export const postAllAnimalsQuestions = (req, res) => {
+  const newQuiz = new AnimalsQuiz(req.body)
+    .save()
+    .then((animal) =>
+      res.status(201).json({
+        success: true,
+        message: "data send successfully",
+        data: animal,
+      })
+    )
+    .catch((err) => console.log(err));
+};
+
+//getAllAnimalsQuestions----------------------------------------------------------
+
+export const getAllAnimalsQuestions = (req, res) => {
+  AnimalsQuiz.find()
+    .then((animalsQuiz) =>
+      res.status(200).json({
+        success: true,
+        message: "data received successfully",
+        data: animalsQuiz,
+      })
+    )
+    .catch((err) => console.log(err));
+};
+
+
+//postAllVehiclesQuestions --------------------------------------------------------
+
+export const postAllVehiclesQuestions = (req, res) => {
+  const newQuiz = new VehiclesQuiz(req.body)
+    .save()
+    .then((vehicles) =>
+      res.status(201).json({
+        success: true,
+        message: "data send successfully",
+        data: vehicles,
+      })
+    )
+    .catch((err) => console.log(err));
+};
+
+//getAllAnimalsQuestions----------------------------------------------------------
+
+export const getAllVehiclesQuestions = (req, res) => {
+  VehiclesQuiz.find()
+    .then((vehiclesQuiz) =>
+      res.status(200).json({
+        success: true,
+        message: "data received successfully",
+        data: vehiclesQuiz,
+      })
+    )
+    .catch((err) => console.log(err));
+};
+
+
+//postAllComicsQuestions --------------------------------------------------------
+
+export const postAllComicsQuestions = (req, res) => {
+  const newQuiz = new ComicsQuiz(req.body)
+    .save()
+    .then((comics) =>
+      res.status(201).json({
+        success: true,
+        message: "data send successfully",
+        data: comics,
+      })
+    )
+    .catch((err) => console.log(err));
+};
+
+//getAllComicsQuestions----------------------------------------------------------
+
+export const getAllComicsQuestions = (req, res) => {
+  ComicsQuiz.find()
+    .then((comicsQuiz) =>
+      res.status(200).json({
+        success: true,
+        message: "data received successfully",
+        data: comicsQuiz,
       })
     )
     .catch((err) => console.log(err));

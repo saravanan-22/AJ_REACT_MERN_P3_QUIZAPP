@@ -9,17 +9,13 @@ const Points = () => {
       <table className="points-table">  
         <thead>
           <tr className="text-white">
-            <th>NO.</th>
-            <th>Category</th>
             <th>Previous Points</th>
             <th>Current Points</th>
             <th>Total Points</th>
           </tr>
         </thead>
         <tbody>
-          <tr className="text-white">
-            <td>1</td>
-            <td>GK</td>
+          <tr className="text-white" style={{backgroundColor : "black"}}>
             <td>{prevPoints}</td>
             <td>{currentPoints}</td>
             <td>{totalPoints}</td>

@@ -14,6 +14,12 @@ import {
   getAllArtQuestions,
   postAllScienceQuestions,
   getAllScienceQuestions,
+  postAllAnimalsQuestions,
+  getAllAnimalsQuestions,
+  postAllVehiclesQuestions,
+  getAllVehiclesQuestions,
+  postAllComicsQuestions,
+  getAllComicsQuestions,
 } from "../controllers/quizController.js";
 const router = express.Router();
 
@@ -59,5 +65,26 @@ router.post("/create/Science&NatureQuizQuestions", postAllScienceQuestions);
 
 // GET -allScienceQuestion
 router.get("/Science&Nature", getAllScienceQuestions);
+
+
+// POST-AllAnimalsQuestions -http://localhost:5000/api/v1/questions/create/
+router.post("/create/AnimalsQuizQuestions", postAllAnimalsQuestions);
+
+// GET -allAnimalsQuestion
+router.get("/Animals", getAllAnimalsQuestions);
+
+
+// POST-AllVehiclesQuestions -http://localhost:5000/api/v1/questions/create/
+router.post("/create/VehiclesQuizQuestions", postAllVehiclesQuestions);
+
+// GET -allVehiclesQuestion
+router.get("/Vehicles", getAllVehiclesQuestions);
+
+
+// POST-AllComicsQuestions -http://localhost:5000/api/v1/questions/create/
+router.post("/create/ComicsQuizQuestions", postAllComicsQuestions);
+
+// GET -allComicsQuestion
+router.get("/Comics", getAllComicsQuestions);
 
 export default router;

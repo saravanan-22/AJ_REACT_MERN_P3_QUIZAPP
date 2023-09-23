@@ -49,7 +49,7 @@ const initialState = {
   questions: [],
   selectedAnswer: [],
   currentQuestionIndex: 0,
-  timeRemaining: 300,
+  timeRemaining: 30,
   points: 0,
   pointsArray: [0],
   answeredCorrectly: [],
@@ -86,52 +86,64 @@ const Gk = () => {
 
   useEffect(() => {
     let timer;
+
     const updateTimer = () => {
       if (state.timeRemaining > 0) {
         timer = setTimeout(() => {
           dispatch({ type: "DECREASE_TIMER" });
         }, 1000);
       } else {
+        // Timer has run out
         navigate("/Home");
         setTimeout(() => {
           window.location.reload();
         }, 4000);
 
-        currPointsArray.push(state.totalCurrPoints);
-        localStorage.setItem(
-          userSpecificStorageKey,
-          JSON.stringify(currPointsArray)
-        );
-        const totalLength = currPointsArray.length;
-        const exactLength = totalLength > 2 ? `${totalLength - Number(2)}` : 0;
-        const preValues = currPointsArray[exactLength];
 
+        if (state.points > 0) {
+          // Update current points array and save it to local storage
+          const updatedCurrPointsArray = [...currPointsArray];
+          updatedCurrPointsArray.push(state.points);
+          localStorage.setItem(
+            userSpecificStorageKey,
+            JSON.stringify(updatedCurrPointsArray)
+          );
+          const totalLength = currPointsArray.length;
+          // console.log(totalLength);
+          const exactLength = totalLength > 2 ? `${totalLength - Number(1)}` : 0;
+          const preValues = currPointsArray[exactLength];
+
+           // update previous value in db-------------------
         axios
-          .put(
-            `https://muddy-bat-moccasins.cyclic.cloud/api/v1/users/updateGkQuestions/previousPoints/${userId}`,
-            {
-              prevPoint: preValues,
-            }
-          )
-          .then((res) => console.log("previous point updated successfully"))
-          .catch((err) => console.log(err));
+        .put(
+          `https://muddy-bat-moccasins.cyclic.cloud/api/v1/users/updateGkQuestions/previousPoints/${userId}`,
+          {
+            prevPoint: preValues,
+          }
+        )
+        .then((res) => console.log("previous point updated successfully"))
+        .catch((err) => console.log(err));
+          
 
-        const totalValue = currPointsArray.reduce(
-          (accumulator, currentValue) => {
-            return accumulator + currentValue;
-          },
-          0
-        );
+          // Calculate total points from the current points array
+          const totalValue = updatedCurrPointsArray.reduce(
+            (accumulator, currentValue) => {
+              return accumulator + currentValue;
+            },
+            0
+          );
 
-        axios
-          .put(
-            `https://muddy-bat-moccasins.cyclic.cloud/api/v1/users/updateGKQuestions/totalPoints/${userId}`,
-            {
-              gkTotalPoints: totalValue,
-            }
-          )
-          .then((res) => console.log("totalPoints updated successfully"))
-          .catch((err) => console.log(err));
+          // Update total points in your API or wherever it's needed
+          axios
+            .put(
+              `https://muddy-bat-moccasins.cyclic.cloud/api/v1/users/updateGKQuestions/totalPoints/${userId}`,
+              {
+                gkTotalPoints: totalValue,
+              }
+            )
+            .then((res) => console.log("totalPoints updated successfully"))
+            .catch((err) => console.log(err));
+        }
       }
     };
 
@@ -140,7 +152,8 @@ const Gk = () => {
     return () => {
       clearTimeout(timer);
     };
-  }, [state.timeRemaining, state.totalCurrPoints]);
+  }, [state.timeRemaining, state.points]);
+
 
   const formatTime = (seconds) => {
     const minutes = Math.floor(seconds / 60);
